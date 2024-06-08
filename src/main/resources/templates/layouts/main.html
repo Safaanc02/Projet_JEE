@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- [Head] start -->
+<head>
+    <title>Advance Initialization | Flat Able Dashboard Template</title>
+    <!-- [Meta] -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+          content="Flat Able is trending dashboard template made using Bootstrap 5 design framework. Flat Able is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies.">
+    <meta name="keywords"
+          content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard">
+    <meta name="author" content="phoenixcoded">
+
+    <!-- [Favicon] icon -->
+    <link rel="icon" th:href="@{/assets/images/logo1.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/assets/css/plugins/dataTables.bootstrap5.min.css}">
+
+    <!-- [Google Font : Public Sans] icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- [Tabler Icons] https://tablericons.com -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/tabler-icons.min.css}">
+
+    <!-- [Feather Icons] https://feathericons.com -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/feather.css}">
+
+    <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome.css}">
+
+    <!-- [Material Icons] https://fonts.google.com/icons -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/material.css}">
+
+    <!-- [Template CSS Files] -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" id="main-style-link">
+    <link rel="stylesheet" th:href="@{/assets/css/style-preset.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
+<style>
+    .logo-lg{
+        margin-bottom: -50px; /* Adjust the value as needed */
+    }
+    .navbar-content{
+        margin-bottom: -50px; /* Adjust the value as needed */
+
+    }
+</style>
+    <!--    fragment to for links-->
+    <div layout:fragment="extra-link">
+
+    </div>
+</head>
+<body data-pc-preset="preset-1" data-pc-sidebar-theme="dark" data-pc-sidebar-caption="true" data-pc-direction="ltr"
+      data-pc-theme="light">
+<!-- [ Pre-loader ] start -->
+<div class="loader-bg">
+    <div class="pc-loader">
+        <div class="loader-fill"></div>
+    </div>
+</div>
+<nav class="pc-sidebar">
+    <div class="navbar-wrapper">
+        <div class="m-header">
+            <a href="../dashboard/index.html" class="b-brand text-primary">
+                <!-- ========   Change your logo from here   ============ -->
+                <img src="../assets/images/icons8-dentist-90.png" alt="logo image" class="logo-lg">
+                <span class="badge bg-primary rounded-pill ms-2 theme-version"></span>
+            </a>
+        </div>
+
+
+        <div class="navbar-content">
+            <ul class="pc-navbar">
+                <li class="pc-item pc-caption" >
+                    <label>Menu</label>
+                </li>
+                <li class="pc-item">
+                    <a th:href="@{/}" class="pc-link">
+                    <span class="pc-micon">
+                    <i class="ph-duotone ph-gauge"></i>
+                    </span>
+                        <span class="pc-mtext">Dashboard</span>
+                    </a>
+                </li>
+                <li class="pc-item pc-hasmenu" th:if="${session.user.roles.contains('secretaire')}">
+                    <a href="#!" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-gauge"></i>
+            </span>
+                        <span class="pc-mtext">Patients</span>
+                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                    </a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" th:href="@{/patients}">List Patients</a></li>
+                        <li class="pc-item"><a class="pc-link" th:href="@{/patients/addPatient}">Add Patients</a></li>
+                    </ul>
+                </li>
+
+                <li class="pc-item pc-hasmenu" th:if="${session.user.roles.contains('dentiste')}">
+                    <a href="#!" class="pc-link">
+            <span class="pc-micon">
+              <i class="ph-duotone ph-gauge"></i>
+            </span>
+                        <span class="pc-mtext">Consultation</span>
+                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
+                    </a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item"><a class="pc-link" th:href="@{/consultations/list}" >List Consultations</a></li>
+                        <li class="pc-item"><a class="pc-link" th:href="@{/consultations}">Add Consultation</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<header class="pc-header">
+    <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
+        <div class="me-auto pc-mob-drp">
+            <ul class="list-unstyled">
+                <!-- ======= Menu collapse Icon ===== -->
+                <li class="pc-h-item pc-sidebar-collapse">
+                    <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
+                        <i class="ph-duotone ph-list"></i>
+                    </a>
+                </li>
+                <li class="pc-h-item pc-sidebar-popup">
+                    <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
+                        <i class="ph-duotone ph-list"></i>
+                    </a>
+                </li>
+                <li class="dropdown pc-h-item">
+                    <a
+                            class="pc-head-link dropdown-toggle arrow-none m-0 trig-drp-search"
+                            data-bs-toggle="dropdown"
+                            href="#"
+                            role="button"
+                            aria-haspopup="false"
+                            aria-expanded="false"
+                    >
+                        <i class="ph-duotone ph-magnifying-glass"></i>
+                    </a>
+                    <div class="dropdown-menu pc-h-dropdown drp-search">
+                        <form class="px-1">
+                            <div class="form-group mb-0 d-flex align-items-center">
+                                <input type="search" class="form-control border-0 shadow-none"
+                                       placeholder="Search here. . .">
+                                <button class="btn btn-light-secondary btn-search">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li class="pc-h-item">
+                    <div class="nav-user-details">
+                        <!-- Access user details from session and display -->
+                        <span class="text-primary" th:text="${session.user.username}"></span>
+                        <span class="text-success" th:text="${session.user.roles.get(0)}"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Logout Button -->
+    <form th:action="@{login/logout}" method="get">
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+
+</header>
+<section layout:fragment="content" class="pc-container" th:fragment="content"></section>
+
+<footer class="pc-footer">
+    <div class="footer-wrapper container-fluid">
+        <div class="row">
+            <div class="col my-1">
+                <p class="m-0"
+                >Flat Able &#9829; crafted by Team
+                    <a href="https://themeforest.net/user/phoenixcoded" target="_blank">Phoenixcoded</a></p
+                >
+            </div>
+            <div class="col-auto my-1">
+                <ul class="list-inline footer-link mb-0">
+                    <li class="list-inline-item"><a href="../index.html">Home</a></li>
+                    <!-- todo link update -->
+                    <li class="list-inline-item"><a href="https://phoenixcoded.gitbook.io/flat-able-bootstrap/"
+                                                    target="_blank">Documentation</a></li>
+                    <li class="list-inline-item"><a href="https://phoenixcoded.authordesk.app/"
+                                                    target="_blank">Support</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer> <!-- Required Js -->
+<script th:src="@{/assets/js/plugins/popper.min.js}"></script>
+<script th:src="@{/assets/js/plugins/simplebar.min.js}"></script>
+<script th:src="@{/assets/js/plugins/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/fonts/custom-font.js}"></script>
+<script th:src="@{/assets/js/pcoded.js}"></script>
+<script th:src="@{/assets/js/plugins/feather.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<!--fragment to be other page that use this layout to add he script-->
+<div layout:fragment="extra-scirpt">
+
+</div>
+</body>
+</html>
